@@ -1,0 +1,28 @@
+{
+  "generationParameters": {
+    "generationDate": "Mon Jul 20 2026 12:17:54 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "http://virtualds4:44300/sap/opu/odata4/sap/zui_managehandlingunits_o4/srvd/sap/zui_managehandlingunits/0001/",
+    "appName": "managehandlinguints",
+    "appTitle": "Manage Handling Units",
+    "appDescription": "Manage Handling Units",
+    "appNamespace": "fluidra.qm.managehu",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.46",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.28.0",
+    "template": "List Report Page V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "ManageHandlingUnits"
+      }
+    ],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
