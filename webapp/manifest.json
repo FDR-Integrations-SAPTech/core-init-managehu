@@ -16,20 +16,11 @@
       "toolsId": "94bd665b-258d-4b43-bdd9-9aac23a02785"
     },
     "dataSources": {
-      "annotation": {
-        "type": "ODataAnnotation",
-        "uri": "annotations/annotation.xml",
-        "settings": {
-          "localUri": "annotations/annotation.xml"
-        }
-      },
       "mainService": {
         "uri": "/sap/opu/odata4/sap/zui_managehandlingunits_o4/srvd/sap/zui_managehandlingunits/0001/",
         "type": "OData",
         "settings": {
-          "annotations": [
-            "annotation"
-          ],
+          "annotations": [],
           "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "4.0"
         }
@@ -123,7 +114,19 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "defaultPopinLayout": "GridSmall",
+                    "demandPopin": true,
+                    "popinDisplay": "Block"
+                  },
+                  "actions": {
+                    "Rec": {
+                      "press": "fluidra.qm.managehu.managehandlinguints.ext.controller.ExtendingList.OnRec",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "Rec."
+                    }
                   }
                 }
               }

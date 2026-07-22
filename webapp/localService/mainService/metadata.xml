@@ -52,9 +52,11 @@
                 <Key>
                     <PropertyRef Name="ParentHandlingUnitUUID"/>
                     <PropertyRef Name="StockItemUUID"/>
+                    <PropertyRef Name="QualityInspectionDocument"/>
                 </Key>
                 <Property Name="ParentHandlingUnitUUID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="StockItemUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="QualityInspectionDocument" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="EWMWarehouse" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="EWMStockType" Type="Edm.String" Nullable="false" MaxLength="2"/>
@@ -70,82 +72,17 @@
                 <Property Name="EWMStockReferenceDocumentItem" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="StockIdentificationNumber" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="WhseQualityInspectionType" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Property Name="QualityInspectionDocument" Type="Edm.String" Nullable="false" MaxLength="35"/>
-                <Property Name="EWMStorageBin" Type="Edm.String" Nullable="false" MaxLength="18"/>
-                <Property Name="HandlingUnitNumber" Type="Edm.String" Nullable="false" MaxLength="20"/>
-                <Property Name="EWMStockQuantityInBaseUnit" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="14"/>
-                <Property Name="EWMStockQuantityBaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="EWMLoadingOrNetWeight" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3"/>
-                <Property Name="EWMLoadingOrNetWeightUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="ShelfLifeExpirationDate" Type="Edm.Date"/>
-                <Property Name="EWMGoodsReceiptDateTime" Type="Edm.DateTimeOffset"/>
-                <Property Name="WarehouseTimeZone" Type="Edm.String" Nullable="false" MaxLength="6"/>
-                <Property Name="EWMStorageType" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="EWMStorageSection" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="InspectionLotOrigin" Type="Edm.String" Nullable="false" MaxLength="2"/>
-                <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12"/>
-                <Property Name="InspectionLotText" Type="Edm.String" Nullable="false" MaxLength="40"/>
-                <Property Name="InspectionLotType" Type="Edm.String" Nullable="false" MaxLength="8"/>
-                <Property Name="InspectionLotQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspectionLotActualQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspectionLotDefectiveQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspectionLotQuantityUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="InspLotCreatedOnLocalDate" Type="Edm.Date"/>
-                <Property Name="InspectionLotObjectText" Type="Edm.String" Nullable="false" MaxLength="40"/>
-                <Property Name="InspLotCreatedOnLocalTime" Type="Edm.TimeOfDay" Nullable="false"/>
-                <Property Name="InspectionLotCreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
-                <Property Name="InspectionLotCreatedOn" Type="Edm.Date"/>
-                <Property Name="InspectionLotCreatedOnTime" Type="Edm.TimeOfDay" Nullable="false"/>
-                <Property Name="InspectionLotChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
-                <Property Name="InspectionLotChangeDate" Type="Edm.Date"/>
-                <Property Name="InspectionLotChangeTime" Type="Edm.TimeOfDay" Nullable="false"/>
-                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="BatchBySupplier" Type="Edm.String" Nullable="false" MaxLength="15"/>
-                <Property Name="Manufacturer" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="PurchasingOrganization" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="PurchasingDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="PurchasingDocumentItem" Type="Edm.String" Nullable="false" MaxLength="5"/>
-                <Property Name="ScheduleLine" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="MaterialDocumentYear" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="MaterialDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="MaterialDocumentItem" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="DeliveryDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="DeliveryDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6"/>
-                <Property Name="InspectionLotSampleQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspectionLotSampleUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="InspLotDynamicRule" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="InspLotDynamicTrggrPoint" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Property Name="InspectionDynamicStage" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="InspectionSeverity" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="InspLotQtyToFree" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspLotQtyToScrap" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspLotQtyToSample" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspLotQtyToBlocked" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspLotQtyToReserves" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspLotQtyToAnotherMaterial" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspLotMaterialPostedTo" Type="Edm.String" Nullable="false" MaxLength="40"/>
-                <Property Name="InspLotBatchTransferredTo" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="InspLotQtyReturnedToSupplier" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="InspLotQtyToBePosted" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="MaterialGroup" Type="Edm.String" Nullable="false" MaxLength="9"/>
-                <Property Name="MaterialType" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="SupplierMaterialNumber" Type="Edm.String" Nullable="false" MaxLength="35"/>
-                <Property Name="ManufacturerMaterial" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="PurchaseOrderItemText" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="POCompanyCode" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="PurchasingOrganization" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="PurchaseOrderItemCategory" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ScheduleLine" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="SupplierMaterialNumber" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="MaterialGroup" Type="Edm.String" Nullable="false" MaxLength="9"/>
+                <Property Name="MaterialType" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="ManufacturingOrderItem" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="ManufacturingOrderType" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="IsCompletelyDelivered" Type="Edm.Boolean" Nullable="false"/>
-                <Property Name="MfgOrderHasMultipleItems" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Property Name="CreationDate" Type="Edm.Date"/>
-                <Property Name="CreationTime" Type="Edm.TimeOfDay" Nullable="false"/>
-                <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
-                <Property Name="LastChangeDate" Type="Edm.Date"/>
-                <Property Name="LastChangeTime" Type="Edm.TimeOfDay" Nullable="false"/>
-                <Property Name="LastChangedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="MRPController" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="ProductionSupervisor" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="MfgProductionVersion" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -162,10 +99,48 @@
                 <Property Name="WorkCenter" Type="Edm.String" Nullable="false" MaxLength="8"/>
                 <Property Name="WCPlant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="SupplyArea" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="WorkCenterTypeCode_2" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="WorkCenterInternalID" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="__OperationControl" Type="com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsOperationControl"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_managehandlingunits.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
+            <ComplexType Name="ManageHandlingUnitsOperationControl">
+                <Property Name="RecordGlobalUsage" Type="Edm.Boolean" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="SAP__Message">
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <Property Name="message" Type="Edm.String" Nullable="false"/>
+                <Property Name="target" Type="Edm.String"/>
+                <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="false"/>
+                <Property Name="transition" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="longtextUrl" Type="Edm.String"/>
+            </ComplexType>
+            <Action Name="RecordGlobalUsage" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType" Nullable="false"/>
+                <ReturnType Type="Collection(com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType)" Nullable="true"/>
+            </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="ManageHandlingUnits" EntityType="com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType"/>
             </EntityContainer>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/ParentHandlingUnitUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Parent"/>
+                <Annotation Term="SAP__common.Heading" String="Parent GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Parent GUID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/StockItemUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID Stock"/>
+                <Annotation Term="SAP__common.QuickInfo" String="GUID Stock Item"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/QualityInspectionDocument">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Quality Inspection"/>
+                <Annotation Term="SAP__common.Heading" String="Quality Insp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Inspection Lot or Inspection Document Number"/>
+            </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMWarehouse">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Warehouse Number"/>
@@ -234,128 +209,20 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Quality Inspection Type"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/QualityInspectionDocument">
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/POCompanyCode">
                 <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Quality Inspection"/>
-                <Annotation Term="SAP__common.Heading" String="Quality Insp"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Inspection Lot or Inspection Document Number"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/HandlingUnitNumber">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Handling Unit"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMStockQuantityInBaseUnit">
-                <Annotation Term="SAP__measures.Unit" Path="EWMStockQuantityBaseUnit"/>
-                <Annotation Term="SAP__common.Label" String="Quantity in Base Unit"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Quantity in Base Unit of Measure"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMStockQuantityBaseUnit">
-                <Annotation Term="SAP__common.IsUnit"/>
-                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
-                <Annotation Term="SAP__common.Heading" String="BUn"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMLoadingOrNetWeight">
-                <Annotation Term="SAP__measures.Unit" Path="EWMLoadingOrNetWeightUnit"/>
-                <Annotation Term="SAP__common.Label" String="Loading Weight"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Loading or Net Weight"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMLoadingOrNetWeightUnit">
-                <Annotation Term="SAP__common.IsUnit"/>
-                <Annotation Term="SAP__common.Label" String="Weight Unit"/>
-                <Annotation Term="SAP__common.Heading" String="Un"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/WarehouseTimeZone">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Time Zone"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMStorageType">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Storage Type"/>
-                <Annotation Term="SAP__common.Heading" String="Ty."/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMStorageSection">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Storage Section"/>
-                <Annotation Term="SAP__common.Heading" String="Sec."/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/Plant">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Plant"/>
-                <Annotation Term="SAP__common.Heading" String="Plnt"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotOrigin">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Inspection Lot Origin"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/ManufacturingOrder">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Production Order"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Order Number (Production Order)"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotType">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Inspection Type"/>
-                <Annotation Term="SAP__common.Heading" String="InspType"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotQuantity">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Inspection Lot Quantity"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotActualQuantity">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Actual Lot Quantity"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotDefectiveQuantity">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Defective Quantity"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotQuantityUnit">
-                <Annotation Term="SAP__common.IsUnit"/>
-                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
-                <Annotation Term="SAP__common.Heading" String="BUn"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Base Unit of Measure for Inspection Lot Quantity"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotCreatedBy">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Created By"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Name of User Who Created the Data Record"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotChangedBy">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Changed By"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Name of User Who Last Changed Data Record"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/Customer">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Customer (Ship-to Party)"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/Supplier">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Supplier"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Supplier's Account Number"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/BatchBySupplier">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Supplier Batch"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Supplier Batch Number"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/Manufacturer">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Manufacturer"/>
-                <Annotation Term="SAP__common.Heading" String="Mfr"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Number of Manufacturer"/>
+                <Annotation Term="SAP__common.Label" String="Company Code"/>
+                <Annotation Term="SAP__common.Heading" String="CoCd"/>
             </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/PurchasingOrganization">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Purchasing Organization"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/PurchasingDocument">
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/PurchaseOrderItemCategory">
                 <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Purchasing Document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/PurchasingDocumentItem">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Purchasing Document Item"/>
+                <Annotation Term="SAP__common.Label" String="Item Category"/>
+                <Annotation Term="SAP__common.Heading" String="I"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Item category in purchasing document"/>
             </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/ScheduleLine">
                 <Annotation Term="SAP__common.IsDigitSequence"/>
@@ -363,98 +230,16 @@
                 <Annotation Term="SAP__common.Heading" String="Schd."/>
                 <Annotation Term="SAP__common.QuickInfo" String="Delivery Schedule Line Counter"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/MaterialDocumentYear">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Material Document Year"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/MaterialDocument">
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/Supplier">
                 <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Material Document"/>
-                <Annotation Term="SAP__common.Heading" String="Mat. Doc."/>
-                <Annotation Term="SAP__common.QuickInfo" String="Number of Material Document"/>
+                <Annotation Term="SAP__common.Label" String="Supplier"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Supplier's Account Number"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/MaterialDocumentItem">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Material Document Item"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/DeliveryDocument">
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/SupplierMaterialNumber">
                 <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Delivery Document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/DeliveryDocumentItem">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Delivery Document Item"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotSampleQuantity">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotSampleUnit"/>
-                <Annotation Term="SAP__common.Label" String="Sample Size"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Inspection Sample Size"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotSampleUnit">
-                <Annotation Term="SAP__common.IsUnit"/>
-                <Annotation Term="SAP__common.Label" String="Sample Unit of Measure"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotDynamicRule">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Dynamic Modification Rule"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotDynamicTrggrPoint">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Time of dyn. modif."/>
-                <Annotation Term="SAP__common.Heading" String="DynTime"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Time of Dynamic Modification in Inspection Lot"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionDynamicStage">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Inspection Stage"/>
-                <Annotation Term="SAP__common.Heading" String="Stage"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionSeverity">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Inspection Severity"/>
-                <Annotation Term="SAP__common.Heading" String="InspSev"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotQtyToFree">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Unrestricted-Use Stock"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotQtyToScrap">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Scrap Quantity"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotQtyToSample">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Sample"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Quantity Posted to Sample"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotQtyToBlocked">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Blocked Stock"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotQtyToReserves">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Reserves"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Quantity Posted to Reserves"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotQtyToAnotherMaterial">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="New Material"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotMaterialPostedTo">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Material Posted To"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotBatchTransferredTo">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Batch Transferred To"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotQtyReturnedToSupplier">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Return to Supplier"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotQtyToBePosted">
-                <Annotation Term="SAP__measures.Unit" Path="InspectionLotQuantityUnit"/>
-                <Annotation Term="SAP__common.Label" String="Quantity to Be Posted"/>
+                <Annotation Term="SAP__common.Label" String="Supplier Mat. No."/>
+                <Annotation Term="SAP__common.Heading" String="Supplier Material Number"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number Used by Supplier"/>
             </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/MaterialGroup">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -466,28 +251,6 @@
                 <Annotation Term="SAP__common.Label" String="Material Type"/>
                 <Annotation Term="SAP__common.Heading" String="MTyp"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/SupplierMaterialNumber">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Supplier Mat. No."/>
-                <Annotation Term="SAP__common.Heading" String="Supplier Material Number"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Material Number Used by Supplier"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/ManufacturerMaterial">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Material"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Material number"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/POCompanyCode">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Company Code"/>
-                <Annotation Term="SAP__common.Heading" String="CoCd"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/PurchaseOrderItemCategory">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Item Category"/>
-                <Annotation Term="SAP__common.Heading" String="I"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Item category in purchasing document"/>
-            </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/ManufacturingOrderItem">
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__common.Label" String="Order Item"/>
@@ -496,21 +259,6 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Order Type"/>
                 <Annotation Term="SAP__common.Heading" String="Type"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/MfgOrderHasMultipleItems">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Multiple Items"/>
-                <Annotation Term="SAP__common.Heading" String="Mult. Itms"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Order Has Multiple Items"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/CreatedByUser">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Entered By"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/LastChangedByUser">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Last Changed By"/>
-                <Annotation Term="SAP__common.Heading" String="Changed By"/>
             </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/MRPController">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -594,18 +342,156 @@
                 <Annotation Term="SAP__common.Heading" String="PSA"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Production Supply Area"/>
             </Annotations>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/WorkCenterTypeCode_2">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Work Center Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/WorkCenterInternalID">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Work Center Internal"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Work Center Internal ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/__OperationControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.RecordGlobalUsage(SAP__self.ManageHandlingUnitsType)">
+                <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/RecordGlobalUsage"/>
+            </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType">
                 <Annotation Term="SAP__common.Label" String="Manage Handling Units Consumption"/>
                 <Annotation Term="SAP__UI.Facets">
                     <Collection>
                         <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="Manage Handling Unit"/>
-                            <PropertyValue Property="ID" String="ZQM_R_ManageHandlingUnits"/>
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
+                            <PropertyValue Property="Label" String="Physical Stock for Products"/>
+                            <PropertyValue Property="ID" String="PhyStock"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#PhyStock"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Purchase Order Items"/>
+                            <PropertyValue Property="ID" String="POItems"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#POItems"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Manufacturing Order"/>
+                            <PropertyValue Property="ID" String="ManfOrd"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#ManfOrd"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Inspection Lot"/>
+                            <PropertyValue Property="ID" String="InspLot"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#InspLot"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Manufacturing Ord. Ops."/>
+                            <PropertyValue Property="ID" String="ManfOrdOp"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#ManfOrdOp"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Work Center"/>
+                            <PropertyValue Property="ID" String="WrkCntr"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#WrkCntr"/>
                         </Record>
                     </Collection>
                 </Annotation>
-                <Annotation Term="SAP__UI.FieldGroup" Qualifier="General">
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="ManfOrd">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ManufacturingOrderItem"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ManufacturingOrderType"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MRPController"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ProductionSupervisor"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MfgProductionVersion"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ProductionUnit"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MfgOrderPlannedTotalQty"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MfgOrderPlannedScrapQty"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MfgOrderConfirmedYieldQty"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MfgOrderConfirmedScrapQty"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MfgOrderConfirmedReworkQty"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ExpectedDeviationQuantity"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ActualDeliveredQuantity"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="ManfOrdOp">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ManufacturingOrderOperation"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="NumberOfOperationConfirmations"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="POItems">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="PurchaseOrderItemText"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="POCompanyCode"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="PurchasingOrganization"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="PurchaseOrderItemCategory"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ScheduleLine"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="Supplier"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="SupplierMaterialNumber"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MaterialGroup"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="MaterialType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="PhyStock">
                     <Record>
                         <PropertyValue Property="Data">
                             <Collection>
@@ -657,41 +543,28 @@
                                 <Record Type="SAP__UI.DataField">
                                     <PropertyValue Property="Value" Path="QualityInspectionDocument"/>
                                 </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="WrkCntr">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
                                 <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMStorageBin"/>
+                                    <PropertyValue Property="Value" Path="WorkCenter"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="HandlingUnitNumber"/>
+                                    <PropertyValue Property="Value" Path="WCPlant"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMStockQuantityInBaseUnit"/>
+                                    <PropertyValue Property="Value" Path="SupplyArea"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMStockQuantityBaseUnit"/>
+                                    <PropertyValue Property="Value" Path="WorkCenterTypeCode_2"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMLoadingOrNetWeight"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMLoadingOrNetWeightUnit"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="ShelfLifeExpirationDate"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMGoodsReceiptDateTime"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="WarehouseTimeZone"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMStorageType"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMStorageSection"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="Plant"/>
+                                    <PropertyValue Property="Value" Path="WorkCenterInternalID"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -713,94 +586,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__UI.Identification">
-                    <Collection>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMWarehouse"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="Product"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockType"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockOwner"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EntitledToDisposeParty"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockUsage"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="StockDocumentCategory"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="ExternalStockDocumentNumber"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="StockItemNumber"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMWorkInProcess"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockReferenceDocCategory"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockReferenceDocument"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockReferenceDocumentItem"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="StockIdentificationNumber"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="WhseQualityInspectionType"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="QualityInspectionDocument"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStorageBin"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="HandlingUnitNumber"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockQuantityInBaseUnit"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockQuantityBaseUnit"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMLoadingOrNetWeight"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMLoadingOrNetWeightUnit"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="ShelfLifeExpirationDate"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMGoodsReceiptDateTime"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="WarehouseTimeZone"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStorageType"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStorageSection"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="Plant"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
@@ -809,33 +594,43 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="Product"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMStockType"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMStockOwner"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EntitledToDisposeParty"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMStockUsage"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="StockDocumentCategory"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="ExternalStockDocumentNumber"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="StockItemNumber"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMWorkInProcess"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMStockReferenceDocCategory"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMStockReferenceDocument"/>
@@ -858,51 +653,96 @@
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStorageBin"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItemText"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="HandlingUnitNumber"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="POCompanyCode"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockQuantityInBaseUnit"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="PurchasingOrganization"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStockQuantityBaseUnit"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItemCategory"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMLoadingOrNetWeight"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="ScheduleLine"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMLoadingOrNetWeightUnit"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="Supplier"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="ShelfLifeExpirationDate"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="SupplierMaterialNumber"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMGoodsReceiptDateTime"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="MaterialGroup"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="WarehouseTimeZone"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="ManufacturingOrderItem"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStorageType"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="MaterialType"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMStorageSection"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="ManufacturingOrderType"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="Plant"/>
+                            <PropertyValue Property="Value" Path="MRPController"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductionSupervisor"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgProductionVersion"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductionUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgOrderPlannedTotalQty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgOrderPlannedScrapQty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgOrderConfirmedYieldQty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgOrderConfirmedScrapQty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgOrderConfirmedReworkQty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ExpectedDeviationQuantity"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ActualDeliveredQuantity"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ManufacturingOrderOperation"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="NumberOfOperationConfirmations"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkCenter"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="WCPlant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="SupplyArea"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkCenterTypeCode_2"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkCenterInternalID"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataFieldForAction">
+                            <PropertyValue Property="Label" String="Record Global Usg."/>
+                            <PropertyValue Property="Action" String="com.sap.gateway.srvd.zui_managehandlingunits.v0001.RecordGlobalUsage(com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType)"/>
+                            <PropertyValue Property="InvocationGrouping" EnumMember="SAP__UI.OperationGroupingType/ChangeSet"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                     </Collection>
@@ -922,20 +762,32 @@
                         <PropertyPath>StockIdentificationNumber</PropertyPath>
                         <PropertyPath>WhseQualityInspectionType</PropertyPath>
                         <PropertyPath>QualityInspectionDocument</PropertyPath>
-                        <PropertyPath>EWMStorageBin</PropertyPath>
-                        <PropertyPath>HandlingUnitNumber</PropertyPath>
-                        <PropertyPath>ShelfLifeExpirationDate</PropertyPath>
-                        <PropertyPath>EWMGoodsReceiptDateTime</PropertyPath>
-                        <PropertyPath>EWMStorageType</PropertyPath>
-                        <PropertyPath>EWMStorageSection</PropertyPath>
-                        <PropertyPath>Plant</PropertyPath>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.Container/ManageHandlingUnits">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
                     <Record>
                         <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>__OperationControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>__OperationControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.InsertRestrictions">
@@ -960,98 +812,6 @@
                 </Annotation>
                 <Annotation Term="SAP__core.OptimisticConcurrency">
                     <Collection/>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.FilterRestrictions">
-                    <Record>
-                        <PropertyValue Property="FilterExpressionRestrictions">
-                            <Collection>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="EWMStockQuantityInBaseUnit"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="EWMLoadingOrNetWeight"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspectionLotQuantity"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspectionLotActualQuantity"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspectionLotDefectiveQuantity"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspectionLotSampleQuantity"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToFree"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToScrap"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToSample"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToBlocked"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToReserves"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToAnotherMaterial"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyReturnedToSupplier"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToBePosted"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="MfgOrderPlannedTotalQty"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="MfgOrderPlannedScrapQty"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="MfgOrderConfirmedYieldQty"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="MfgOrderConfirmedScrapQty"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="MfgOrderConfirmedReworkQty"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="ExpectedDeviationQuantity"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="ActualDeliveredQuantity"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container">
@@ -1118,88 +878,22 @@
                 <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
                 <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/ParentHandlingUnitUUID">
-                <Annotation Term="SAP__common.Label" String="Parent"/>
-                <Annotation Term="SAP__common.Heading" String="Parent GUID"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Parent GUID"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/StockItemUUID">
-                <Annotation Term="SAP__common.Label" String="GUID Stock"/>
-                <Annotation Term="SAP__common.QuickInfo" String="GUID Stock Item"/>
-            </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/StockIdentificationNumber">
                 <Annotation Term="SAP__common.Label" String="Stock ID"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Identification Number of Stock"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMStorageBin">
-                <Annotation Term="SAP__common.Label" String="Storage Bin"/>
-                <Annotation Term="SAP__common.Heading" String="Stor. Bin"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/ShelfLifeExpirationDate">
-                <Annotation Term="SAP__common.Label" String="Expiration Date"/>
-                <Annotation Term="SAP__common.Heading" String="Expiration"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Shelf Life Expiration Date"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMGoodsReceiptDateTime">
-                <Annotation Term="SAP__common.Label" String="Goods Receipt Date"/>
-                <Annotation Term="SAP__common.Heading" String="GR Date"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotText">
-                <Annotation Term="SAP__common.Label" String="Inspection Lot Text"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotCreatedOnLocalDate">
-                <Annotation Term="SAP__common.Label" String="Lot Created"/>
-                <Annotation Term="SAP__common.Heading" String="CrDate"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Date in Time Zone Where Lot Created"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotObjectText">
-                <Annotation Term="SAP__common.Label" String="Object Short Text"/>
-                <Annotation Term="SAP__common.Heading" String="Short text for inspection object"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Short Text for Inspection Object"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspLotCreatedOnLocalTime">
-                <Annotation Term="SAP__common.Label" String="Created At (Local Time)"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Time in Time Zone Where Lot Created"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotCreatedOn">
-                <Annotation Term="SAP__common.Label" String="Created On"/>
-                <Annotation Term="SAP__common.Heading" String="Created On (SystDte)"/>
-                <Annotation Term="SAP__common.QuickInfo" String="System Date on Which Data Record Was Created"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotCreatedOnTime">
-                <Annotation Term="SAP__common.Label" String="Created At"/>
-                <Annotation Term="SAP__common.QuickInfo" String="System Time of Creation"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotChangeDate">
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.Heading" String="Changed On (SystDte)"/>
-                <Annotation Term="SAP__common.QuickInfo" String="System Date on Which Data Record Was Changed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLotChangeTime">
-                <Annotation Term="SAP__common.Label" String="Changed At"/>
-                <Annotation Term="SAP__common.QuickInfo" String="System Time of Change"/>
-            </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/PurchaseOrderItemText">
                 <Annotation Term="SAP__common.Label" String="Short Text"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/IsCompletelyDelivered">
-                <Annotation Term="SAP__common.Label" String="Delivery Completed"/>
-                <Annotation Term="SAP__common.Heading" String="DCI"/>
-                <Annotation Term="SAP__common.QuickInfo" String="&quot;Delivery Completed&quot; Indicator"/>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/__OperationControl/RecordGlobalUsage">
+                <Annotation Term="SAP__common.Label" String="Dyn. Action Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Action Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Action Property"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/CreationDate">
-                <Annotation Term="SAP__common.Label" String="Order Creation Date"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/CreationTime">
-                <Annotation Term="SAP__common.Label" String="Order Creation Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/LastChangeDate">
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.Heading" String="ChangeDate"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Change Date for Order Master"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/LastChangeTime">
-                <Annotation Term="SAP__common.Label" String="Changed At"/>
+            <Annotations Target="SAP__self.ManageHandlingUnitsOperationControl/RecordGlobalUsage">
+                <Annotation Term="SAP__common.Label" String="Dyn. Action Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Action Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Action Property"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
