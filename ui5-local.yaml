@@ -45,7 +45,19 @@ server:
             mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true
             resolveExternalServiceReferences: true
-        annotations: []
+          - urlPath: /sap/opu/odata/SAP/API_INSPECTIONLOT_SRV
+            metadataPath: ./webapp/localService/InspectionLotSrv/metadata.xml
+            mockdataPath: ./webapp/localService/InspectionLotSrv/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/SAP/QM_INSPUSGDSC_MANAGE_SRV
+            metadataPath: ./webapp/localService/QmInspUDSrv/metadata.xml
+            mockdataPath: ./webapp/localService/QmInspUDSrv/data
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/InspectionLotSrv/API_INSPECTIONLOT_ANNO_MDL.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_INSPECTIONLOT_ANNO_MDL',Version='0001')/$value/
+          - localPath: ./webapp/localService/QmInspUDSrv/QM_INSPUSGDSC_MANAGE_ANNO_MDL.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='QM_INSPUSGDSC_MANAGE_ANNO_MDL',Version='0001')/$value/
 builder:
   resources:
     excludes:

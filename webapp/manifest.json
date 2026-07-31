@@ -24,6 +24,42 @@
           "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "InspectionLotSrv": {
+        "uri": "/sap/opu/odata/SAP/API_INSPECTIONLOT_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "API_INSPECTIONLOT_ANNO_MDL"
+          ],
+          "localUri": "localService/InspectionLotSrv/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "QmInspUDSrv": {
+        "uri": "/sap/opu/odata/SAP/QM_INSPUSGDSC_MANAGE_SRV",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "QM_INSPUSGDSC_MANAGE_ANNO_MDL"
+          ],
+          "localUri": "localService/QmInspUDSrv/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "API_INSPECTIONLOT_ANNO_MDL": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_INSPECTIONLOT_ANNO_MDL',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/InspectionLotSrv/API_INSPECTIONLOT_ANNO_MDL.xml"
+        }
+      },
+      "QM_INSPUSGDSC_MANAGE_ANNO_MDL": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='QM_INSPUSGDSC_MANAGE_ANNO_MDL',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/QmInspUDSrv/QM_INSPUSGDSC_MANAGE_ANNO_MDL.xml"
+        }
       }
     }
   },
@@ -44,13 +80,14 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
     "dependencies": {
       "minUI5Version": "1.120.46",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.ui.mdc": {},
+        "sap.ui.table": {}
       }
     },
     "contentDensities": {
@@ -73,6 +110,24 @@
           "earlyRequests": true
         }
       },
+      "InspectionLot": {
+        "dataSource": "InspectionLotSrv",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "QmInspUD": {
+        "dataSource": "QmInspUDSrv",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
@@ -87,12 +142,17 @@
         {
           "pattern": ":?query:",
           "name": "ManageHandlingUnitsList",
-          "target": "ManageHandlingUnitsList"
+          "target": [
+            "ManageHandlingUnitsList"
+          ]
         },
         {
           "pattern": "ManageHandlingUnits({key}):?query:",
           "name": "ManageHandlingUnitsObjectPage",
-          "target": "ManageHandlingUnitsObjectPage"
+          "target": [
+            "ManageHandlingUnitsList",
+            "ManageHandlingUnitsObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -117,15 +177,31 @@
                     "type": "ResponsiveTable",
                     "defaultPopinLayout": "GridSmall",
                     "demandPopin": true,
-                    "popinDisplay": "Block"
+                    "popinDisplay": "Block",
+                    "technicalRequestProperties": [
+                      "ChangedDateTime"
+                    ]
                   },
                   "actions": {
-                    "Rec": {
-                      "press": "fluidra.qm.managehu.managehandlinguints.ext.controller.ExtendingList.OnRec",
+                    "DataFieldForAction::com.sap.gateway.srvd.zui_managehandlingunits.v0001.RecordGlobalUsage::com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType": {
+                      "press": ".extension.fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt.OnRecordUsageDec",
+                      "requiresSelection": true,
+                      "visible": true,
+                      "position": {
+                        "placement": "Before"
+                      },
+                      "enableOnSelect": "single"
+                    },
+                    "RecUD": {
+                      "press": ".extension.fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt.OnRecordUsageDec",
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": true,
-                      "text": "Rec."
+                      "text": "Record Usage Desc",
+                      "position": {
+                        "placement": "Before",
+                        "anchor": "DataFieldForAction::com.sap.gateway.srvd.zui_managehandlingunits.v0001.RecordGlobalUsage::com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType"
+                      }
                     }
                   }
                 }
@@ -142,6 +218,15 @@
               "editableHeaderContent": false,
               "contextPath": "/ManageHandlingUnits"
             }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController": {
+            "controllerName": "fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt"
           }
         }
       }
