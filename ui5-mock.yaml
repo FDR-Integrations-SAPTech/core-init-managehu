@@ -58,6 +58,8 @@ server:
             urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_INSPECTIONLOT_ANNO_MDL',Version='0001')/$value/
           - localPath: ./webapp/localService/QmInspUDSrv/QM_INSPUSGDSC_MANAGE_ANNO_MDL.xml
             urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='QM_INSPUSGDSC_MANAGE_ANNO_MDL',Version='0001')/$value/
+          - localPath: ./webapp/localService/mainService/metadata.xml
+            urlPath: annotations/annotations.xml
 builder:
   resources:
     excludes:

@@ -4,7 +4,7 @@
             <Button text="Close" type="Reject" press=".onDailogClose"/>
         </endButton>
         <beginButton>
-            <Button text="Update Decision Usage" press=".onRecordUD" type="Accept"/>
+            <Button text="Post Usage Decision" press=".onRecordUD" type="Accept" id="postbtn" enabled="false"/>
         </beginButton>
         <content>
             <OverflowToolbar>
@@ -14,7 +14,7 @@
 
                 
             </OverflowToolbar>
-            <Table noDataText="Drop column list items here and columns in the area above" id="table0" fixedLayout="false" growing="true" mode="SingleSelectLeft" popinLayout="GridLarge" width="" alternateRowColors="true" sticky="ColumnHeaders">
+            <Table noDataText="Drop column list items here and columns in the area above" id="table0" selectionChange="onItemSelect" fixedLayout="false" growing="true" mode="SingleSelectLeft" popinLayout="GridLarge" width="" alternateRowColors="true" sticky="ColumnHeaders">
                 <items>
                     <ColumnListItem type="Active">
                         <cells>
@@ -24,7 +24,7 @@
                             <Text text="{SelectedCodeSet}"/>
                             <Text text="{SelectedCodeSetText}"/>
                             <Text text="{SelectedCodeSetPlant}"/>
-                            <Text text="{InspectionLot}"/>
+                            <!-- <Text text="{InspectionLot}"/> -->
                         </cells>
                     </ColumnListItem>
                 </items>
@@ -59,11 +59,11 @@
                             <Label text="Selected Code Set Plant" id="label5"/>
                         </header>
                     </Column>
-                    <Column id="column6">
+                    <!-- <Column id="column6">
                         <header>
                             <Label text="Inspection Lot" id="label6"/>
                         </header>
-                    </Column>
+                    </Column> -->
                 </columns>
             </Table>
         </content>

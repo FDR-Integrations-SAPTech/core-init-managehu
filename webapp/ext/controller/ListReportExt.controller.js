@@ -3,8 +3,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 	"sap/ui/model/FilterOperator",
 	"sap/ui/core/Messaging",
 	"sap/fe/core/controllerextensions/MessageHandler",
-	"sap/m/MessageToast"
-], function (ControllerExtension, Filter, FilterOperator, Messaging, MessageHandler, MessageToast) {
+	"sap/ui/model/json/JSONModel"
+], function (ControllerExtension, Filter, FilterOperator, Messaging, MessageHandler, JSONModel) {
 	'use strict';
 
 	return ControllerExtension.extend('fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt', {
@@ -22,28 +22,35 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 				this._ExtAPI = this.base.getExtensionAPI();
 				this._oListTable = this.getView().byId("fluidra.qm.managehu.managehandlinguints::ManageHandlingUnitsList--fe::table::ManageHandlingUnits::LineItem::Table");
 				this._oListTable.attachSelectionChange(this.onRowSelection, this);
+				this._InspTypCngDtTime = [];
+				var oJdata = { enablePostUD: false };
 
-				
+				this.getView().setModel(new JSONModel(oJdata), "settingsModel");
+
+
 			}
 		},
-		onRecordUD: function (oEvent) 
-		{
+		onRecordUD: function (oEvent) {
 			var oInspLotModel = this._ExtAPI.getModel("InspectionLot");
+			oInspLotModel.mMessages = {};
 			var oTable = sap.ui.getCore().byId("table0");
 			var oItemSelectedContext = oTable.getSelectedItem().getBindingContext().getObject();
 			var aDeferredGroups = oInspLotModel.getDeferredGroups();
 			var sBatchGroup = "inspectionLotBatchGroup";
 			var oMessageManager = sap.ui.getCore().getMessageManager();
+			oMessageManager.removeAllMessages();
+
+			oInspLotModel.resetChanges();
 
 			if (!aDeferredGroups.includes(sBatchGroup)) {
 				oInspLotModel.setDeferredGroups(aDeferredGroups.concat([sBatchGroup]));
 			}
 
 			var oData = [];
-			this._ILFilters.forEach(element => {
+			this._InspTypCngDtTime.forEach((element, index) => {
 
 				var oPayload = {
-					"InspectionLot": element.oValue1,
+					"InspectionLot": element.InspectionLot,
 					"InspLotUsageDecisionLevel": "L",
 					"InspectionLotQualityScore": "100",
 					"InspLotUsageDecisionCatalog": "3",
@@ -51,106 +58,113 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 					"InspLotUsgeDcsnSelectedSet": oItemSelectedContext.SelectedCodeSet,
 					"InspLotUsageDecisionCodeGroup": oItemSelectedContext.UsageDecisionCodeGroup,
 					"InspectionLotUsageDecisionCode": oItemSelectedContext.UsageDecisionCode,
-					"ChangedDateTime": this._InspCngDtTime.find(cngdt => cngdt.InspectionLot === element.oValue1).ChangedDateTime
+					"ChangedDateTime": element.ChangedDateTime
 
 				}
 
 				oInspLotModel.create("/A_InspLotUsageDecision", oPayload, {
-					groupId: sBatchGroup
+					groupId: sBatchGroup,
+					changeSetId: "ChangesSetID" + index
 				});
 			})
-			
-			// var fnFunction = function () {
-			// 	return new Promise(function (fnResolve, fnReject) {
+
+
+
+			var fnFunction = function (othis) {
+				return new Promise(function (fnResolve, fnReject) {
+
+					var that = othis;
 					oInspLotModel.submitChanges({
 						groupId: sBatchGroup,
 						success: function (oData, oResponse) {
-
+							debugger;
 							var aResponses = (oData && oData.__batchResponses) ||
-								             (oResponse && oResponse.data && oResponse.data.__batchResponses);
+								(oResponse && oResponse.data && oResponse.data.__batchResponses);
 
-							var oInspModel = this._ExtAPI.getModel("InspectionLot"),
-								oModel = this._ExtAPI.getModel();
+							var oInspModel = that._ExtAPI.getModel("InspectionLot"),
+								oModel = that._ExtAPI.getModel();
 
-							var msgText;
-							// if (aResponses) {
-							// 	aResponses[0].__changeResponses.forEach(function (oResponseItem) {
-							// 		
-							// 		//*  *// --- Handle Errors ---
-							// 		if (oResponseItem.statusCode >= 400) {
-							// 			try {
-							// 				var oResponseBody = JSON.parse(oResponseItem.response.body);
+							var messageModel = (oInspModel.mMessages['/A_InspLotUsageDecision']);
+							if (messageModel) {
+								messageModel.forEach(message => {
+									message.setMessageProcessor(that._ExtAPI.getModel())
+									message.setPersistent(true)
+								});
+							}
+							fnResolve();
 
-							// 				oMessageManager.addMessages(oInspModel.mMessages['/A_InspLotUsageDecision'][0])
+							that.onDailogClose();
+						},
+						error: function (oError) {
 
-
-							// 			} catch (e) { console.error(e); }
-							// 		}
-
-							// 		// --- Handle Success Messages (sap-message Header) ---
-							// 		else
-							// 		{
-										
-							// 		}
-							// 	// 	else if (oResponseItem.headers && oResponseItem.headers["sap-message"]) {
-							// 	// 		try {
-							// 	// 			var oSapMsg = JSON.parse(oResponseItem.headers["sap-message"]);
-							// 	// 			Messaging.addMessages(new sap.ui.core.message.Message({
-							// 	// 				message: oSapMsg.message,
-							// 	// 				type: sap.ui.core.MessageType.Success,
-							// 	// 				target: "",
-							// 	// 				persistent: true
-							// 	// 			}));
-							// 	// 		} catch (e) { console.error(e); }
-							// 	// 	}
-							// 	});
-							// }
-							// // var messageModel = (oInspModel.mMessages['/A_InspLotUsageDecision'][0]);
-							// // messageModel.setMessageProcessor(this._ExtAPI.getModel());
-							// // this._ExtAPI._controller.messageHandler.showMessages();
-							// // fnResolve();
-
-							this.onDailogClose();
-						}.bind(this),
-						// error: fnReject
-
-					});
-			// 	}).bind(this);
-			// }.bind(this)
-			// var mParameters = {
-			// 	sActionLabel: "Custom Text"
-			// };
-			// this._ExtAPI.editFlow.securedExecution(fnFunction, mParameters);
+						}
+					})
+				})
+			}
+			var mParameters = {
+				sActionLabel: "Custom Text"
+			};
+			this._ExtAPI.editFlow.securedExecution(fnFunction(this), mParameters);
 		},
 
+		onItemSelect(oEvent) {
+			sap.ui.getCore().byId("postbtn").setEnabled(true);
+		},
 		onafterClose: function (oEvent) {
+
 			
-			this._ExtAPI.refresh();
 			this._oDialog.destroy();
 		},
 
+		validateInspLotType: function (oRecords, property) {
+
+			const fvalue = oRecords[0].getObject().InspectionLotType;
+
+			return oRecords.every(item => item.getObject()[property] === fvalue);
+
+		},
+
 		onRowSelection: function (oSource) {
-			
+
 			var oSelectedContext = oSource.getSource().getSelectedContexts();
-			this._ILFilters = [];
-			this._InspCngDtTime = [];
+			this._InspTypCngDtTime = [];
+			var sameType = true;
+			this._ILFilter = undefined;
+			if (oSelectedContext.length > 0) {
+				this._ILFilter = new Filter("InspectionLot", FilterOperator.EQ, oSelectedContext[0].getObject().InspectionLot);
 
-			oSelectedContext.forEach(element => {
-				if (element.getObject().InspectionLot !== "" || element.getObject().InspectionLot !== undefined) {
-					var flag = this._ILFilters.find(oInst => oInst.oValue1 == element.getObject().InspectionLot);
+				const isValid = this.validateInspLotType(oSelectedContext, "InspectionLotType");
 
-					if (!flag) {
-						this._ILFilters.push(
-							new sap.ui.model.Filter("InspectionLot", FilterOperator.EQ, element.getObject().InspectionLot));
+				if (isValid === true) {
+					oSelectedContext.forEach((element, index) => {
+						if (element.getObject().InspectionLot !== "" || element.getObject().InspectionLot !== undefined) {
 
-						this._InspCngDtTime.push({
-							InspectionLot: element.getObject().InspectionLot,
-							ChangedDateTime: element.getObject().ChangedDateTime
-						})
-					}
+							this._InspTypCngDtTime.push({
+								InspectionLot: element.getObject().InspectionLot,
+								ChangedDateTime: element.getObject().ChangedDateTime,
+								InspectionLotType: element.getObject().InspectionLotType
+							});
+
+						}
+
+					});
 				}
-			});
+				this.getView().getModel("settingsModel").setProperty("/enablePostUD", isValid);
 
+				if (!isValid) {
+
+					var oMessage = new sap.ui.core.message.Message({
+						message: this._Controller.getResourceBundle().getText("errorNosametype"),
+						persistent: true, // create message as transition message
+						type: sap.ui.core.MessageType.Error
+					});/*  */
+
+					this._ExtAPI.setCustomMessage(oMessage);
+					this.base.messageHandler.showMessages();
+
+				}
+
+			}
 		},
 
 		OnRecordUsageDec: function () {
@@ -161,7 +175,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 				controller: this
 
 			}).then(function (oDialog) {
-				
+
 
 				this._oDialog = oDialog;
 				this.getView().addDependent(this._oDialog);
@@ -170,23 +184,21 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 			}.bind(this))
 		},
 		onDailogClose: function (oEvent) {
+			this._oListTable.refresh();
 			this._oDialog.close();
 
 		},
 
 		afterDialogOpen: function (oEvent) {
-			
+
 			var oTable = sap.ui.getCore().byId("table0"),
 				oItemTemplate = oTable.getAggregation("items")[0];
 
+
 			oTable.bindItems({
 				path: "/UsageCodeVH",
-				filters: [
-					new Filter({
-						filters: this._ILFilters,
-						and: false
-					})
-				],
+				filters: this._ILFilter,
+
 				template: oItemTemplate.clone()
 			});
 		},

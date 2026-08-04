@@ -60,6 +60,13 @@
         "settings": {
           "localUri": "localService/QmInspUDSrv/QM_INSPUSGDSC_MANAGE_ANNO_MDL.xml"
         }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotations.xml",
+        "settings": {
+          "localUri": "/localService/mainService/metadata.xml"
+        }
       }
     }
   },
@@ -183,25 +190,12 @@
                     ]
                   },
                   "actions": {
-                    "DataFieldForAction::com.sap.gateway.srvd.zui_managehandlingunits.v0001.RecordGlobalUsage::com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType": {
-                      "press": ".extension.fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt.OnRecordUsageDec",
-                      "requiresSelection": true,
-                      "visible": true,
-                      "position": {
-                        "placement": "Before"
-                      },
-                      "enableOnSelect": "single"
-                    },
-                    "RecUD": {
+                    "postUD": {
                       "press": ".extension.fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt.OnRecordUsageDec",
                       "visible": true,
-                      "enabled": true,
                       "requiresSelection": true,
-                      "text": "Record Usage Desc",
-                      "position": {
-                        "placement": "Before",
-                        "anchor": "DataFieldForAction::com.sap.gateway.srvd.zui_managehandlingunits.v0001.RecordGlobalUsage::com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType"
-                      }
+                      "text": "{i18n>recordGlobalUsg}",
+                      "enabled": "{settingsModel>/enablePostUD}"
                     }
                   }
                 }

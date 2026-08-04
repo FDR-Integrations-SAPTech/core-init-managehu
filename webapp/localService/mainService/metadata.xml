@@ -150,12 +150,12 @@
                 <Property Name="MfgOrderConfirmedReworkQty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
                 <Property Name="ExpectedDeviationQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
                 <Property Name="ActualDeliveredQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="ManufacturingOrderOperation" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="NumberOfOperationConfirmations" Type="Edm.String" Nullable="false" MaxLength="8"/>
                 <Property Name="WCPlant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="SupplyArea" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="WorkCenterTypeCode_2" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="WorkCenterInternalID" Type="Edm.String" Nullable="false" MaxLength="8"/>
-                <Property Name="__OperationControl" Type="com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsOperationControl"/>
-                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_managehandlingunits.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
             <EntityType Name="UsageCodeVHType">
                 <Key>
@@ -173,22 +173,6 @@
                 <Property Name="UsageDecisionCodeText" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="SelectedCodeSetText" Type="Edm.String" Nullable="false" MaxLength="40"/>
             </EntityType>
-            <ComplexType Name="ManageHandlingUnitsOperationControl">
-                <Property Name="RecordGlobalUsage" Type="Edm.Boolean" Nullable="false"/>
-            </ComplexType>
-            <ComplexType Name="SAP__Message">
-                <Property Name="code" Type="Edm.String" Nullable="false"/>
-                <Property Name="message" Type="Edm.String" Nullable="false"/>
-                <Property Name="target" Type="Edm.String"/>
-                <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="false"/>
-                <Property Name="transition" Type="Edm.Boolean" Nullable="false"/>
-                <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
-                <Property Name="longtextUrl" Type="Edm.String"/>
-            </ComplexType>
-            <Action Name="RecordGlobalUsage" EntitySetPath="_it" IsBound="true">
-                <Parameter Name="_it" Type="com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType" Nullable="false"/>
-                <ReturnType Type="Collection(com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType)" Nullable="true"/>
-            </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="ManageHandlingUnits" EntityType="com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType"/>
                 <EntitySet Name="UsageCodeVH" EntityType="com.sap.gateway.srvd.zui_managehandlingunits.v0001.UsageCodeVHType"/>
@@ -588,6 +572,15 @@
                 <Annotation Term="SAP__common.Heading" String="Quantity of Goods received"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Quantity of Goods Received for the Order Item"/>
             </Annotations>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/ManufacturingOrderOperation">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Operation or Phase"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Operation or Phase Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/NumberOfOperationConfirmations">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Number Of Confirmations"/>
+            </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/WCPlant">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Plant"/>
@@ -607,14 +600,6 @@
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__common.Label" String="Work Center Internal"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Work Center Internal ID"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/__OperationControl">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="SAP__self.RecordGlobalUsage(SAP__self.ManageHandlingUnitsType)">
-                <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/RecordGlobalUsage"/>
             </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType">
                 <Annotation Term="SAP__common.Label" String="Manage Handling Units Consumption"/>
@@ -840,6 +825,20 @@
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
                                     <PropertyValue Property="Value" Path="ActualDeliveredQuantity"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="ManfOrdOp">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="ManufacturingOrderOperation"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="NumberOfOperationConfirmations"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -1205,7 +1204,13 @@
                             <PropertyValue Property="Value" Path="InspLotCreatedOnLocalTime"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ManufacturingOrderOperation"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="InspectionLotCreatedBy"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="NumberOfOperationConfirmations"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="InspectionLotCreatedOn"/>
@@ -1324,12 +1329,6 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="InspLotQtyToBePosted"/>
                         </Record>
-                        <Record Type="SAP__UI.DataFieldForAction">
-                            <PropertyValue Property="Label" String="Record Global Usg."/>
-                            <PropertyValue Property="Action" String="com.sap.gateway.srvd.zui_managehandlingunits.v0001.RecordGlobalUsage(com.sap.gateway.srvd.zui_managehandlingunits.v0001.ManageHandlingUnitsType)"/>
-                            <PropertyValue Property="InvocationGrouping" EnumMember="SAP__UI.OperationGroupingType/Isolated"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
-                        </Record>
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__UI.PresentationVariant">
@@ -1369,30 +1368,11 @@
                         <PropertyPath>EWMStorageSection</PropertyPath>
                     </Collection>
                 </Annotation>
-                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.Container/ManageHandlingUnits">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
                     <Record>
                         <PropertyValue Property="Searchable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.FilterRestrictions">
-                    <Record>
-                        <PropertyValue Property="NonFilterableProperties">
-                            <Collection>
-                                <PropertyPath>__OperationControl</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SortRestrictions">
-                    <Record>
-                        <PropertyValue Property="NonSortableProperties">
-                            <Collection>
-                                <PropertyPath>__OperationControl</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.InsertRestrictions">
@@ -1417,6 +1397,90 @@
                 </Annotation>
                 <Annotation Term="SAP__core.OptimisticConcurrency">
                     <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="EWMStockQuantityInBaseUnit"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="EWMLoadingOrNetWeight"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspectionLotQuantity"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspectionLotActualQuantity"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspectionLotDefectiveQuantity"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspectionLotSampleQuantity"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToFree"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToScrap"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToSample"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToBlocked"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToReserves"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToAnotherMaterial"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyReturnedToSupplier"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="InspLotQtyToBePosted"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="MfgOrderPlannedTotalQty"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="MfgOrderPlannedScrapQty"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="MfgOrderConfirmedReworkQty"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ExpectedDeviationQuantity"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ActualDeliveredQuantity"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container">
@@ -1634,22 +1698,12 @@
             <Annotations Target="SAP__self.ManageHandlingUnitsType/PurchaseOrderItemText">
                 <Annotation Term="SAP__common.Label" String="Short Text"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/__OperationControl/RecordGlobalUsage">
-                <Annotation Term="SAP__common.Label" String="Dyn. Action Control"/>
-                <Annotation Term="SAP__common.Heading" String="Dynamic Action Control"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Action Property"/>
-            </Annotations>
             <Annotations Target="SAP__self.UsageCodeVHType/UsageDecisionCodeText">
                 <Annotation Term="SAP__common.Label" String="Code Text"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Text for Code"/>
             </Annotations>
             <Annotations Target="SAP__self.UsageCodeVHType/SelectedCodeSetText">
                 <Annotation Term="SAP__common.Label" String="Text for Selected Set"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsOperationControl/RecordGlobalUsage">
-                <Annotation Term="SAP__common.Label" String="Dyn. Action Control"/>
-                <Annotation Term="SAP__common.Heading" String="Dynamic Action Control"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Action Property"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
