@@ -3,8 +3,10 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 	"sap/ui/model/FilterOperator",
 	"sap/ui/core/Messaging",
 	"sap/fe/core/controllerextensions/MessageHandler",
-	"sap/ui/model/json/JSONModel"
-], function (ControllerExtension, Filter, FilterOperator, Messaging, MessageHandler, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageToast"
+
+], function (ControllerExtension, Filter, FilterOperator, Messaging, MessageHandler, JSONModel, MessageToast) {
 	'use strict';
 
 	return ControllerExtension.extend('fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt', {
@@ -65,43 +67,35 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 				oInspLotModel.createEntry("/A_InspLotUsageDecision", {
 					groupId: sBatchGroup,
 					properties: oPayload,
-					success: function (oData, oResponse) {
-						debugger;
-					},					
 					changeSetId: "changeSet" + index
 				});
 
 			});
-
 
 			var fnFunction = function (othis) {
 				return new Promise(function (fnResolve, fnReject) {
 
 					var that = othis;
 					oInspLotModel.submitChanges({
-						// groupId: sBatchGroup,
 						refreshAfterChange: false,
 						success: function (oData, oResponse) {
-							debugger;
-							var aResponses = (oData && oData.__batchResponses) ||
-								(oResponse && oResponse.data && oResponse.data.__batchResponses);
-
 							var oInspModel = that._ExtAPI.getModel("InspectionLot"),
 								oModel = that._ExtAPI.getModel();
 
 							var messageModel = oInspLotModel.getMessagesByEntity("/A_InspLotUsageDecision");
 							
-							if (messageModel) {
+							if (messageModel.length > 0) {
 								messageModel.forEach(message => {
 									message.setMessageProcessor(that._ExtAPI.getModel())
 									message.setPersistent(true)
 								});
 							}
+							else
+								MessageToast.show(that._Controller.getResourceBundle().getText("successToast"));							
 							fnResolve();
-
 							that.onDailogClose();
 						}
-					})
+					})	
 					othis._ExtAPI.refresh();
 				})
 			}
@@ -162,11 +156,10 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 						message: this._Controller.getResourceBundle().getText("errorNosametype"),
 						persistent: true, // create message as transition message
 						type: sap.ui.core.MessageType.Error
-					});/*  */
+					});
 
 					this._ExtAPI.setCustomMessage(oMessage);
-					// this.base.messageHandler.showMessages();
-
+				
 				}
 
 			}

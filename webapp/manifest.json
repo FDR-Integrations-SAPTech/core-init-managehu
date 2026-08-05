@@ -189,7 +189,11 @@
                     "popinDisplay": "Block",
                     "technicalRequestProperties": [
                       "ChangedDateTime"
-                    ]
+                    ],
+                    "selectionLimit": 50,
+                    "selectionMode": "Multi",
+                    "enableExport": true,
+                    "condensedTableLayout": true
                   },
                   "actions": {
                     "postUD": {
@@ -201,7 +205,8 @@
                     }
                   }
                 }
-              }
+              },
+              "initialLoad": "Auto"
             }
           }
         },
