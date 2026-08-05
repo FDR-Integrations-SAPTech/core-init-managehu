@@ -123,6 +123,8 @@
         "settings": {
           "operationMode": "Server",
           "autoExpandSelect": true,
+          "useBatch": true,
+          "refreshAfterChange": false,
           "earlyRequests": true
         }
       },

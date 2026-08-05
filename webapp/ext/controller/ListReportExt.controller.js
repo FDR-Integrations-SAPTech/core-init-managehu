@@ -39,14 +39,14 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 			var sBatchGroup = "inspectionLotBatchGroup";
 			var oMessageManager = sap.ui.getCore().getMessageManager();
 			oMessageManager.removeAllMessages();
-
+			var oData = [];
 			oInspLotModel.resetChanges();
 
 			if (!aDeferredGroups.includes(sBatchGroup)) {
 				oInspLotModel.setDeferredGroups(aDeferredGroups.concat([sBatchGroup]));
 			}
 
-			var oData = [];
+
 			this._InspTypCngDtTime.forEach((element, index) => {
 
 				var oPayload = {
@@ -62,12 +62,16 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 
 				}
 
-				oInspLotModel.create("/A_InspLotUsageDecision", oPayload, {
+				oInspLotModel.createEntry("/A_InspLotUsageDecision", {
 					groupId: sBatchGroup,
-					changeSetId: "ChangesSetID" + index
+					properties: oPayload,
+					success: function (oData, oResponse) {
+						debugger;
+					},					
+					changeSetId: "changeSet" + index
 				});
-			})
 
+			});
 
 
 			var fnFunction = function (othis) {
@@ -75,7 +79,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 
 					var that = othis;
 					oInspLotModel.submitChanges({
-						groupId: sBatchGroup,
+						// groupId: sBatchGroup,
+						refreshAfterChange: false,
 						success: function (oData, oResponse) {
 							debugger;
 							var aResponses = (oData && oData.__batchResponses) ||
@@ -84,7 +89,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 							var oInspModel = that._ExtAPI.getModel("InspectionLot"),
 								oModel = that._ExtAPI.getModel();
 
-							var messageModel = (oInspModel.mMessages['/A_InspLotUsageDecision']);
+							var messageModel = oInspLotModel.getMessagesByEntity("/A_InspLotUsageDecision");
+							
 							if (messageModel) {
 								messageModel.forEach(message => {
 									message.setMessageProcessor(that._ExtAPI.getModel())
@@ -94,11 +100,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 							fnResolve();
 
 							that.onDailogClose();
-						},
-						error: function (oError) {
-
 						}
 					})
+					othis._ExtAPI.refresh();
 				})
 			}
 			var mParameters = {
@@ -112,7 +116,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 		},
 		onafterClose: function (oEvent) {
 
-			
+
 			this._oDialog.destroy();
 		},
 
@@ -124,7 +128,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 
 		},
 
-		onRowSelection: function (oSource) {
+		onRowSelection: function (oSource) 
+		{
 
 			var oSelectedContext = oSource.getSource().getSelectedContexts();
 			this._InspTypCngDtTime = [];
@@ -160,7 +165,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 					});/*  */
 
 					this._ExtAPI.setCustomMessage(oMessage);
-					this.base.messageHandler.showMessages();
+					// this.base.messageHandler.showMessages();
 
 				}
 
@@ -184,7 +189,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 			}.bind(this))
 		},
 		onDailogClose: function (oEvent) {
-			this._oListTable.refresh();
+		
+			this._InspTypCngDtTime = [];
+			this._ILFilter = undefined;
+			this._oListTable.getContent().clearSelection();
+			this.getView().getModel("settingsModel").setProperty("/enablePostUD", false);
 			this._oDialog.close();
 
 		},
