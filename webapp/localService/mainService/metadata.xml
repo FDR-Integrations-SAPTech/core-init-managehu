@@ -57,8 +57,9 @@
                 <Property Name="ParentHandlingUnitUUID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="StockItemUUID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="WorkCenter" Type="Edm.String" Nullable="false" MaxLength="8"/>
-                <Property Name="EWMWarehouse" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="HandlingUnitNumber" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="EWMWarehouse" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="EWMStockType" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="EWMStockOwner" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="EntitledToDisposeParty" Type="Edm.String" Nullable="false" MaxLength="10"/>
@@ -74,7 +75,6 @@
                 <Property Name="WhseQualityInspectionType" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="QualityInspectionDocument" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="EWMStorageBin" Type="Edm.String" Nullable="false" MaxLength="18"/>
-                <Property Name="HandlingUnitNumber" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="EWMStockQuantityInBaseUnit" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="14"/>
                 <Property Name="EWMStockQuantityBaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="EWMLoadingOrNetWeight" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3"/>
@@ -84,7 +84,7 @@
                 <Property Name="WarehouseTimeZone" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="EWMStorageType" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="EWMStorageSection" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="InspectionLot" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="InspectionLot" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="InspectionLotOrigin" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="InspectionLotText" Type="Edm.String" Nullable="false" MaxLength="40"/>
@@ -193,16 +193,20 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Work Center"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMWarehouse">
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/HandlingUnitNumber">
                 <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Warehouse Number"/>
-                <Annotation Term="SAP__common.Heading" String="WhN"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Warehouse Number/Warehouse Complex"/>
+                <Annotation Term="SAP__common.Label" String="Handling Unit"/>
             </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/Product">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Product"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Product Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMWarehouse">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Warehouse Number"/>
+                <Annotation Term="SAP__common.Heading" String="WhN"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Warehouse Number/Warehouse Complex"/>
             </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMStockType">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -267,10 +271,6 @@
                 <Annotation Term="SAP__common.Heading" String="Quality Insp"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Inspection Lot or Inspection Document Number"/>
             </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/HandlingUnitNumber">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Handling Unit"/>
-            </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/EWMStockQuantityInBaseUnit">
                 <Annotation Term="SAP__measures.Unit" Path="EWMStockQuantityBaseUnit"/>
                 <Annotation Term="SAP__common.Label" String="Quantity in Base Unit"/>
@@ -304,12 +304,6 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Storage Section"/>
                 <Annotation Term="SAP__common.Heading" String="Sec."/>
-            </Annotations>
-            <Annotations Target="SAP__self.ManageHandlingUnitsType/InspectionLot">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Inspection Lot"/>
-                <Annotation Term="SAP__common.Heading" String="Insp. Lot"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Inspection Lot Number"/>
             </Annotations>
             <Annotations Target="SAP__self.ManageHandlingUnitsType/Plant">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -637,6 +631,32 @@
                         </Record>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="General"/>
+                            <PropertyValue Property="ID" String="Header"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#Header"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="Header">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="HandlingUnitNumber"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="Product"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="EWMWarehouse"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__UI.FieldGroup" Qualifier="InspLot">
                     <Record>
                         <PropertyValue Property="Data">
@@ -875,12 +895,6 @@
                         <PropertyValue Property="Data">
                             <Collection>
                                 <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="EWMWarehouse"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="Product"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
                                     <PropertyValue Property="Value" Path="EWMStockType"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
@@ -926,9 +940,6 @@
                                     <PropertyValue Property="Value" Path="EWMStorageBin"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="HandlingUnitNumber"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
                                     <PropertyValue Property="Value" Path="EWMStockQuantityInBaseUnit"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
@@ -967,9 +978,6 @@
                                     <PropertyValue Property="Value" Path="WorkCenter"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
-                                    <PropertyValue Property="Value" Path="WCPlant"/>
-                                </Record>
-                                <Record Type="SAP__UI.DataField">
                                     <PropertyValue Property="Value" Path="SupplyArea"/>
                                 </Record>
                                 <Record Type="SAP__UI.DataField">
@@ -984,16 +992,12 @@
                 </Annotation>
                 <Annotation Term="SAP__UI.HeaderInfo">
                     <Record>
-                        <PropertyValue Property="TypeName" String="EWMWarehouse"/>
-                        <PropertyValue Property="TypeNamePlural" String="EWMWarehouse"/>
+                        <PropertyValue Property="TypeName" String="UD pending HU’s"/>
+                        <PropertyValue Property="TypeNamePlural" String="UD pending HU’s"/>
                         <PropertyValue Property="Title">
                             <Record Type="SAP__UI.DataField">
-                                <PropertyValue Property="Value" Path="EWMWarehouse"/>
-                            </Record>
-                        </PropertyValue>
-                        <PropertyValue Property="Description">
-                            <Record Type="SAP__UI.DataField">
-                                <PropertyValue Property="Value" Path="EWMWarehouse"/>
+                                <PropertyValue Property="Label" String="InspectionLot"/>
+                                <PropertyValue Property="Value" Path="Product"/>
                             </Record>
                         </PropertyValue>
                     </Record>
@@ -1006,16 +1010,17 @@
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="EWMWarehouse"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <PropertyValue Property="Value" Path="HandlingUnitNumber"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="Product"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMStockType"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="EWMWarehouse"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMStockOwner"/>
@@ -1071,10 +1076,6 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="EWMStorageBin"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="HandlingUnitNumber"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
@@ -1335,6 +1336,7 @@
                     <Record>
                         <PropertyValue Property="RequestAtLeast">
                             <Collection>
+                                <PropertyPath>InspectionLotType</PropertyPath>
                                 <PropertyPath>ChangedDateTime</PropertyPath>
                             </Collection>
                         </PropertyValue>
@@ -1347,8 +1349,6 @@
                 </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
-                        <PropertyPath>EWMWarehouse</PropertyPath>
-                        <PropertyPath>Product</PropertyPath>
                         <PropertyPath>EWMStockType</PropertyPath>
                         <PropertyPath>EWMStockOwner</PropertyPath>
                         <PropertyPath>EntitledToDisposeParty</PropertyPath>
@@ -1361,7 +1361,6 @@
                         <PropertyPath>WhseQualityInspectionType</PropertyPath>
                         <PropertyPath>QualityInspectionDocument</PropertyPath>
                         <PropertyPath>EWMStorageBin</PropertyPath>
-                        <PropertyPath>HandlingUnitNumber</PropertyPath>
                         <PropertyPath>ShelfLifeExpirationDate</PropertyPath>
                         <PropertyPath>EWMGoodsReceiptDateTime</PropertyPath>
                         <PropertyPath>EWMStorageType</PropertyPath>
@@ -1594,9 +1593,6 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="SelectedCodeSetPlant"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="InspectionLot"/>
                         </Record>
                     </Collection>
                 </Annotation>
