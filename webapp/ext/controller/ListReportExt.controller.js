@@ -92,16 +92,15 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 								if (oInspModel.getProperty("/A_InspLotUsageDecision('" + item.InspectionLot + "')"))
 									messageModel.push(new sap.ui.core.message.Message({
 										message: that._Controller.getResourceBundle().getText("inspectionLotUD") + item.InspectionLot,
-										// persistent: true,
+										persistent: true,
+										// processor: oModel,
 										type: sap.ui.core.MessageType.Success
 									}) );
 						});
 
-
-
 					if (messageModel.length > 0) {
 						messageModel.forEach(message => {
-							message.setMessageProcessor(that._ExtAPI.getModel())
+							// message.setMessageProcessor(that._ExtAPI.getModel())
 							message.setPersistent(true)
 							sap.ui.getCore().getMessageManager().addMessages(message)
 						});
