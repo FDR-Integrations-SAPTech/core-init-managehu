@@ -143,6 +143,7 @@ onRowSelection: function (oSource) {
 	var oSelectedContext = oSource.getSource().getSelectedContexts();
 	this._InspTypCngDtTime = [];
 	var sameType = true;
+	var InspError = false;
 	this._ILFilter = undefined;
 	if (oSelectedContext.length > 0) {
 		this._ILFilter = new Filter("InspectionLot", FilterOperator.EQ, oSelectedContext[0].getObject().InspectionLot);
@@ -160,15 +161,20 @@ onRowSelection: function (oSource) {
 					});
 
 				}
+				else{
+					isValid = false
+					InspError = true
+				}
 
 			});
 		}
 		this.getView().getModel("settingsModel").setProperty("/enablePostUD", isValid);
 
 		if (!isValid) {
+			var emsg = InspError === true ? "errorInsp" : "errorNosametype" ;
 
 			var oMessage = new sap.ui.core.message.Message({
-				message: this._Controller.getResourceBundle().getText("errorNosametype"),
+				message: this._Controller.getResourceBundle().getText(emsg),
 				persistent: true, // create message as transition message
 				type: sap.ui.core.MessageType.Error
 			});
