@@ -25,7 +25,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 				this._oListTable = this.getView().byId("fluidra.qm.managehu.managehandlinguints::ManageHandlingUnitsList--fe::table::ManageHandlingUnits::LineItem::Table");
 				this._oListTable.attachSelectionChange(this.onRowSelection, this);
 				this._InspTypCngDtTime = [];
-				var oJdata = { enablePostUD: false };
+				var oJdata = { enablePostUD: false, enableManageUD: false };
 
 				this.getView().setModel(new JSONModel(oJdata), "settingsModel");
 
@@ -124,6 +124,27 @@ this._ExtAPI.editFlow.securedExecution(fnFunction(this), mParameters);
 onItemSelect(oEvent) {
 	sap.ui.getCore().byId("postbtn").setEnabled(true);
 },
+		onManageUD: function () {
+			var aSelectedContexts = this._oListTable.getSelectedContexts();
+			if (aSelectedContexts.length !== 1) {
+				return;
+			}
+
+			var sInspectionLot = aSelectedContexts[0].getProperty("InspectionLot");
+			if (sInspectionLot === undefined || sInspectionLot === null || String(sInspectionLot).trim() === "") {
+				return;
+			}
+
+			this._ExtAPI.getNavigationController().navigateToExternal({
+				target: {
+					semanticObject: "InspectionLot",
+					action: "recordUsageDecision"
+				},
+				params: {
+					InspectionLot: sInspectionLot
+				}
+			});
+		},
 onafterClose: function (oEvent) {
 
 	this._ExtAPI.refresh();
@@ -141,6 +162,9 @@ validateInspLotType: function (oRecords, property) {
 onRowSelection: function (oSource) {
 
 	var oSelectedContext = oSource.getSource().getSelectedContexts();
+		var sInspectionLot = oSelectedContext.length === 1 ? oSelectedContext[0].getProperty("InspectionLot") : undefined;
+		this.getView().getModel("settingsModel").setProperty("/enableManageUD",
+			sInspectionLot !== undefined && sInspectionLot !== null && String(sInspectionLot).trim() !== "");
 	this._InspTypCngDtTime = [];
 	var sameType = true;
 	var InspError = false;
@@ -148,11 +172,11 @@ onRowSelection: function (oSource) {
 	if (oSelectedContext.length > 0) {
 		this._ILFilter = new Filter("InspectionLot", FilterOperator.EQ, oSelectedContext[0].getObject().InspectionLot);
 
-		const isValid = this.validateInspLotType(oSelectedContext, "InspectionLotType");
+		let isValid = this.validateInspLotType(oSelectedContext, "InspectionLotType");
 
 		if (isValid === true) {
 			oSelectedContext.forEach((element, index) => {
-				if (element.getObject().InspectionLot !== "" || element.getObject().InspectionLot !== undefined) {
+				if (element.getObject().InspectionLot !== undefined && element.getObject().InspectionLot !== null && String(element.getObject().InspectionLot).trim() !== "") {
 
 					this._InspTypCngDtTime.push({
 						InspectionLot: element.getObject().InspectionLot,

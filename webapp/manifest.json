@@ -196,6 +196,13 @@
                     "condensedTableLayout": true
                   },
                   "actions": {
+                    "manageUD": {
+                      "press": ".extension.fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt.onManageUD",
+                      "visible": true,
+                      "requiresSelection": true,
+                      "text": "{i18n>manageUD}",
+                      "enabled": "{settingsModel>/enableManageUD}"
+                    },
                     "postUD": {
                       "press": ".extension.fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt.OnRecordUsageDec",
                       "visible": true,
