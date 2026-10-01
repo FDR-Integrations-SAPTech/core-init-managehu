@@ -4,9 +4,10 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 	"sap/ui/core/Messaging",
 	"sap/fe/core/controllerextensions/MessageHandler",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
+	"sap/m/MessageToast",
+	"sap/ushell/Container"
 
-], function (ControllerExtension, Filter, FilterOperator, Messaging, MessageHandler, JSONModel, MessageToast) {
+], function (ControllerExtension, Filter, FilterOperator, Messaging, MessageHandler, JSONModel, MessageToast, Container) {
 	'use strict';
 
 	return ControllerExtension.extend('fluidra.qm.managehu.managehandlinguints.ext.controller.ListReportExt', {
@@ -135,16 +136,21 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension',
 			if (sInspectionLot === undefined || sInspectionLot === null || String(sInspectionLot).trim() === "") {
 				return;
 			}
-
-			this._ExtAPI.getNavigationController().navigateToExternal({
-				target: {
-					semanticObject: "InspectionLot",
-					action: "recordUsageDecision"
-				},
-				params: {
-					InspectionLot: sInspectionLot
-				}
-			});
+			Container.getServiceAsync("CrossApplicationNavigation").then(function (oCrossAppNavigator)
+			{
+                    
+                    // 3. Define the target App via Semantic Object & Action
+                    oCrossAppNavigator.toExternal({
+                        target: {
+                            semanticObject: "InspectionLot",
+                            action: "recordUsageDecision"
+                        },
+                        params: {
+                            "InspectionLot": [sInspectionLot] // Parameters must be passed inside an array
+                        }
+                    });
+            });
+		
 		},
 		onafterClose: function (oEvent) {
 
